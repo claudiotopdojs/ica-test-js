@@ -1,54 +1,120 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
-    
-</head>
-<body class="container">
-    
-    <h1 class="text-center">Products</h1>
-    
-    <form class="form">
-        
-        <div class="form-group">
-            <label for="title">Titulo</label>
-            <input type="text" id="title" class="form-control" required autofocus/>        
-        </div>    
-                
-        <div class="form-group">
-            <label for="price">Preço</label>
-            <input id="price" type="number" class="form-control"  min="0.01" step="0.01" value="0.0" required />
-        </div>
-        
-        <div class="form-group">
-            <label for="description">Descrição</label>
-            <input type="text" id="description" class="form-control" required autofocus/>        
-        </div>    
 
-        <button class="btn btn-primary" type="submit">Incluir</button>
-    </form>
-      
-    <br>
-    <br>
-    
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Titulo</th>
-                <th>Preço</th>
-                <th>Descrição</th>
-            </tr>
-        </thead>
+<html>
+
+    <head>
+        <title>Products</title>
         
-        <tbody>
-        </tbody>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.css">
+
+        <style>
+            .container.show-modal {
+                overflow: hidden;
+            }
+
+            a.form-btn {
+                display: inline-block;
+                padding: 6px 12px;
+                background-color: transparent;
+                text-decoration: none;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .container.show-modal .modal {
+                display: flex !important;
+                align-items: center;
+                background: rgba(0, 0, 0, 0.25);
+            }
+
+            .container.show-modal .modal .modal-content {
+                border-radius: 2px;
+                border: none;
+                box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12); 
+            }
+
+            .container.show-modal .modal .modal-header {
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .container.show-modal .modal .modal-header .modal-title {
+                flex: 1;
+                font-size: 16px;
+            }
+
+            .form-control:focus {
+                box-shadow: none;
+            }
+        </style>
+    </head>
+
+    <body class="container">
+        <h1 class="text-center">Produtos</h1>
         
-        <tfoot>
-        </tfoot>
-    </table>
-    
-</body>
+        <form id="form" class="form" method="post">
+            <div class="form-group">
+                <label for="title">Titulo</label>
+                <input type="text" id="title" name="title" class="form-control" required autofocus />
+            </div>
+
+            <div class="form-group">
+                <label for="price">Preço</label>
+                <input type="number" id="price" name="price" class="form-control" min="0.01" step="0.01" value="0.0" required />
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <input type="text" id="description" name="description" class="form-control" required autofocus />
+            </div>
+
+            <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#modal">Incluir</button>
+        </form>       
+        
+        <br>
+        <br>
+
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <!-- <th>#</th> -->
+                    <th>Titulo</th>
+                    <th style="min-width: 75px">Preço</th>
+                    <th>Descrição</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+
+            <tfoot></tfoot>
+        </table>
+
+        <!-- Modal -->
+        <div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Produto</h6>
+                    </div>
+
+                    <div class="modal-body"></div>
+                    
+                    <div class="modal-footer">
+                        <a class="form-btn" id="cancel">Cancelar</button>
+                        <a class="form-btn" id="submit">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
+
 </html>
